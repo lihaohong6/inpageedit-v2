@@ -46,7 +46,7 @@ export default async function init() {
   // 等待前置项目
   await Promise.all([
     syncI18nData(noCache),
-    loadScript(`${pluginCDN}/lib/ssi-modal/ssi-modal.js`),
+    loadScript(`ssi-modal`),
     initQueryData(),
   ])
 

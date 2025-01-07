@@ -1,5 +1,6 @@
 import { resolvePath } from './_dir'
 import { mwConfig } from '../utils/mw'
+import {I18N_DATA} from "../libs/i18n.js";
 
 // 设置
 const cacheTime = 2 * 60 * 60 * 1000
@@ -64,13 +65,7 @@ function saveToCache(data) {
  * @function getOriginalData
  */
 async function getOriginalData() {
-  console.time('[InPageEdit] 从远程获取 i18n 数据')
-  var data = await $.getJSON(cacheUrl, {
-    cache: false,
-    timestamp: new Date().getTime(),
-  })
-  if (typeof data !== 'object') data = {}
-  saveToCache(data)
-  console.timeEnd('[InPageEdit] 从远程获取 i18n 数据')
+  const data = JSON.parse(I18N_DATA);
+  saveToCache(data);
   return data
 }
