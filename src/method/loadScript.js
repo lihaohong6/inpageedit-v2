@@ -24,7 +24,11 @@ const scriptMap = {
 
 export function loadScript(src, noCache) {
   if (scriptMap[src]) {
-    return Promise.resolve(scriptMap[src]());
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(scriptMap[src]());
+      }, 10);
+    });
   }
   return Promise.reject(new Error("Cannot load script " + src));
 }

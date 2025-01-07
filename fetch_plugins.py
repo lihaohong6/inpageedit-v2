@@ -1,4 +1,5 @@
 import json
+import textwrap
 
 import requests
 
@@ -10,9 +11,13 @@ result2 = []
 for name in plugins:
     name: str
     content = requests.get(CDN_ROOT + "plugins/" + name).text
-    func_name = name.replace("-", "_").replace(".js", "").replace("/", "_")
+    content = content.replace("testingcf.jsdelivr.net", "cdn.jsdelivr.net")
+    func_name = (name
+                 .replace("-", "_")
+                 .replace(".js", "")
+                 .replace("/", "_"))
     result.append(f"export function {func_name}() {{"
-                  f"  {content}"
+                  f"{textwrap.indent(content, '  ')}"
                   "}")
     result2.append(f"'{name}': {func_name},")
 with open("src/libs/plugins.js", "w") as f:
