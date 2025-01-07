@@ -934,7 +934,7 @@ body.ssi-modalOpen {
 .ssi-backdrop {
   position: fixed;
   overflow: hidden;
-  z-index: 1500;
+  z-index: 50; /* changed by gh:lihaohong6/User:PetraMagna */
   top: 0;
   left: 0;
   background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
