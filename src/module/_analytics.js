@@ -3,7 +3,7 @@
  * @param {string} featID 模块ID，例如 quick_edit
  */
 export function _analytics(featID) {
-
+  console.log(featID);
 }
 
 export {
