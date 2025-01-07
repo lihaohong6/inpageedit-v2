@@ -1,17 +1,12 @@
-// import { _analytics } from './_analytics'
 import { _msg } from './_msg'
 import { $br, $hr, $progress, $link } from './_elements'
 import {
   githubLink,
   pluginGithub,
-  analyticsApi,
-  analyticsDash,
   pluginCDN,
 } from './endpoints'
 import version from './version'
 import { pluginStore } from './pluginStore'
-import { _analytics, getSiteID } from './_analytics'
-import { mwConfig } from '../utils/mw'
 
 const InPageEdit = window.InPageEdit || {}
 
@@ -515,58 +510,6 @@ export const preference = {
             )
           })
         }
-
-        // 获取Analysis数据
-        const userName = mwConfig.wgUserName
-        $.get(`${analyticsApi}/query/user`, {
-          userName,
-          siteUrl: getSiteID(),
-          prop: '*',
-        }).then((ret) => {
-          $tabContent.find('#analysis-container').html('')
-          /** @type {{ userName: string; siteUrl: string; siteName: string; _total: number; features: { featureID: string; count: number }[] }} */
-          const data = ret.body.query[0]
-          const total = data._total
-          const dashUrl = `${analyticsDash}/user?${$.param({
-            userName,
-            siteUrl: data.siteUrl,
-          })}`
-          let featData = data.features
-          featData = featData.sort((a, b) => b.count - a.count)
-
-          const featTable = $('<table>', {
-            class: 'wikitable',
-            style: 'width: 96%',
-          }).append(
-            $('<tr>').append(
-              $('<th>', { text: 'ID' }),
-              $('<th>', { text: 'Count' }),
-              $('<th>', { text: '%' })
-            )
-          )
-          featData.forEach(({ count, featureID }) => {
-            featTable.append(
-              $('<tr>').append(
-                $('<th>', { text: featureID }),
-                $('<td>', { text: count }),
-                $('<td>', { text: ((count / total) * 100).toFixed(2) + '%' })
-              )
-            )
-          })
-          $tabContent.find('#analysis-container').append(
-            $('<h4>', {
-              text: `${data.userName}@${data.siteName}`,
-            }),
-            $('<p>').append(
-              $link({
-                href: dashUrl,
-                text: 'Analytics Dashboard →',
-              })
-            ),
-            $('<p>').append(_msg('preference-analysis-totaluse', total)),
-            featTable
-          )
-        })
       },
     })
   },
