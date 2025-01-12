@@ -1,12 +1,13 @@
 import {ssiModal} from "../libs/scripts.js";
 import {
-  code_mirror_cm6, code_mirror_script,
+  code_mirror_script,
   color_preview,
   edit_any_page,
   fix_double_entrance, monaco_script,
   quick_thank, toolbox,
   wiki_editor
 } from "../libs/plugins.js";
+import {code_mirror_cm6} from "../libs/code_mirror.js";
 
 const scriptMap = {
   'ssi-modal': ssiModal,

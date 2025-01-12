@@ -47,6 +47,22 @@ export class pluginStore {
    * @module pluginStore.initUserPlugin 初始化用户插件
    */
   static initUserPlugin() {
+    // Do not use testingcf since it is not in the CSP whitelist
+    const originalFetch = fetch
+    window.fetch = async (url, options) => {
+      if (typeof url === 'string' && url.includes('testingcf.jsdelivr.net')) {
+        url = url.replace('testingcf.jsdelivr.net', 'cdn.jsdelivr.net')
+      }
+      return originalFetch(url, options)
+    }
+    const originalLoader = mw.loader.load
+    mw.loader.load = async (url, type) => {
+      if (typeof url === 'string' && url.includes('testingcf.jsdelivr.net')) {
+        url = url.replace('testingcf.jsdelivr.net', 'cdn.jsdelivr.net')
+      }
+      return originalLoader(url, type)
+    }
+
     var userPlugins = preference.get('plugins')
     if (typeof userPlugins === 'object' && userPlugins.length > 0) {
       $.each(userPlugins, (key, val) => {

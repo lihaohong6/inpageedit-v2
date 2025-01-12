@@ -11,7 +11,6 @@ result2 = []
 for name in plugins:
     name: str
     content = requests.get(CDN_ROOT + "plugins/" + name).text
-    content = content.replace("testingcf.jsdelivr.net", "cdn.jsdelivr.net")
     func_name = (name
                  .replace("-", "_")
                  .replace(".js", "")
