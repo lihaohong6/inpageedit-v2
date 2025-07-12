@@ -1,7 +1,7 @@
 A fork of https://github.com/inpageedit/inpageedit-v2.
 ## Usage
 ```javascript
-mw.loader.load("https://meta.miraheze.org/wiki/User:PetraMagna/InPageEdit.js?action=raw&ctype=text/javascript")
+mw.loader.load("https://cdn.jsdelivr.net/gh/lihaohong6/inpageedit-v2@9c28af01e33371d7e765e186827a53a4016c99a3/in-page-edit.js");
 ```
 
 ## Build
